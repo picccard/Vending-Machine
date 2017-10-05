@@ -1,19 +1,19 @@
-from Mynt import Mynt
-from Spiller import Spiller
-from Boesse import Boesse
-from Pris import Pris
-from Prisliste import Prisliste
-from Trekning import Trekning
-from Automat import Automat
+from Coin import Coin
+from Player import Player
+from CoinBox import CoinBox
+from Price import Price
+from Pricelist import Pricelist
+from Raffle import Raffle
+from VendingMachine import VendingMachine
 import os, sys
-#import Mynt, Spiller, Boesse, Pris, Prisliste, Trekning, Automat, os, sys
+#import Coin, Player, CoinBox, Price, Pricelist, Raffle, VendingMachine, os, sys
 
-class Automattest:
+class VendingMachineTest:
     @staticmethod
     def somethingWrong():
         print('You typed something illegal...')
         input('Press enter to try again. ')
-        Automattest.clear()
+        VendingMachineTest.clear()
 
     @staticmethod
     def clear():
@@ -24,67 +24,67 @@ class Automattest:
         print('Round is starting')
         print('-----------------')
         # Creates a vending machine
-        automaten = Automat(200, 5)
+        vendingMachine = VendingMachine(200, 5)
 
         # Sets the price for these currencys: EUR, USD, NOK, DONG
         CHOISES = ['EUR', 'USD', 'NOK', 'DONG']
         PRICES = [0.12, 0.16, 1.00, 0.08]
         for i in range(len(CHOISES)):
-            automaten.settPris(CHOISES[i], PRICES[i])
+            vendingMachine.setPrice(CHOISES[i], PRICES[i])
 
         # Runs until the box is full
-        while not automaten.erBoessenFull():
+        while not vendingMachine.isCoinBoxFull():
             # Reads your coin
             # Loop until acceptable valuta chosen
-            valuta = ''
-            while valuta not in CHOISES:
-                valuta = input('\n' + automaten.finnPrislisten() +
+            currency = ''
+            while currency not in CHOISES:
+                currency = input('\n' + vendingMachine.getPricelist() +
                                '\n\n' + 'What currency is your coin? ').upper()
-                if valuta not in CHOISES:
-                    Automattest.somethingWrong()
+                if currency not in CHOISES:
+                    VendingMachineTest.somethingWrong()
             # Loop until verdi is a float
-            verdi = ''
-            while not isinstance(verdi, float):
-                verdiStr = input('Each number you guess will cost ' + str(automaten.finnPrisEttTall(valuta))
-                                 + ' {}'.format(str(valuta)) + '\n\nYour coins value in ' + valuta + ': ')
+            value = ''
+            while not isinstance(value, float):
+                valueStr = input('Each number you guess will cost ' + str(vendingMachine.getPriceForAGuess(currency))
+                                 + ' {}'.format(str(currency)) + '\n\nYour coins value in ' + currency + ': ')
                 try:
-                    verdi = float(verdiStr)
+                    value = float(valueStr)
                 except ValueError as ex:
-                    Automattest.somethingWrong()
+                    VendingMachineTest.somethingWrong()
 
             # Reads your selected numbers to guess
-            antallTippetall = automaten.finnAntallTippetall(valuta, verdi)
-            tippingen = [0] * antallTippetall
-            for i in range(antallTippetall):
-                while tippingen[i] not in range(1, 10):
+            numGuesses = vendingMachine.getAllowedGuesses(currency, value)
+            guesses = [0] * numGuesses
+            for i in range(numGuesses):
+                while guesses[i] not in range(1, 10):
                     try:
-                        tippingen[i] = int(input('Chose a number between 1 and 9: '))
-                        if tippingen[i] not in range(1, 10):
-                            Automattest.somethingWrong()
+                        guesses[i] = int(input('Chose a number between 1 and 9: '))
+                        if guesses[i] not in range(1, 10):
+                            VendingMachineTest.somethingWrong()
                     except ValueError as ex:
-                        Automattest.somethingWrong()
+                        VendingMachineTest.somethingWrong()
 
             # Gets ready to display results
-            Automattest.clear()
+            VendingMachineTest.clear()
             print('--------------------')
             print('|  Round summmary  |')
             print('--------------------')
 
             # Creates a player and displays player info
-            spilleren = Spiller(tippingen, valuta, verdi)
+            player = Player(guesses, currency, value)
             print('Player-Info:')
-            print(str(spilleren) + '\n')
+            print(str(player) + '\n')
 
             # Plays and displays results
-            trekningen = automaten.spill(spilleren)
-            tallene = trekningen.getTrekningen()
-            print('The following numbers was chosen: ' + str(tallene))
+            raffle = vendingMachine.play(player)
+            draw = raffle.getDraw()
+            print('The following numbers was chosen: ' + str(draw))
             print('You have {} correct numbers'.format(
-                automaten.finnAntallRette(trekningen, spilleren)))
+                vendingMachine.getMatches(raffle, player)))
 
             # Displays the coins inside the machine
             print()
-            print(automaten.finnBoessen())
+            print(vendingMachine.getCoinBox())
 
             # Finishes of this round
             print('-----------------')
@@ -94,8 +94,13 @@ class Automattest:
             again = input('Type \'exit\' to quit: ')
             if again == 'exit':
                 sys.exit()
-            Automattest.clear()
+            VendingMachineTest.clear()
+
+        # Once the coinbox is full, quit loop, display message and quit
+        VendingMachineTest.clear()
+        input('The vending machine\'s coinbox needs emptying, ' +
+              'please contact staff... ')
 
 
 if __name__ == '__main__':
-    Automattest.main()
+    VendingMachineTest.main()
