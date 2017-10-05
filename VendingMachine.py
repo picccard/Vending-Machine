@@ -11,10 +11,10 @@ class VendingMachine:
         return Raffle()
 
     def setPrice(self, currency, price):
-        self.pricelist.settPris(currency, price)
+        self.pricelist.setPrice(currency, price)
 
     def isCoinBoxFull(self):
-        return self.coinBox.ifFull()
+        return self.coinBox.isFull()
 
     def getPriceForAGuess(self, currency):
         return self.pricelist.getPriceForAGuess(currency)
@@ -23,10 +23,10 @@ class VendingMachine:
         return self.pricelist.getAllowedGuesses(currency, value)
 
     def getPricelist(self):
-        return self.prisliste.finnPrislisten()
+        return self.pricelist.getPricelist()
 
     def getCoinBox(self):
-        return self.boesse.finnBoessen()
+        return self.coinBox.getCoinBox()
 
     def getMatches(self, raffle, player):
         return raffle.getMatches(player.guess)

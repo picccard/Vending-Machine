@@ -1,12 +1,12 @@
 from Coin import Coin
 class CoinBox:
     def __init__(self, tableSize):
-        self.coins = [0] * tableSize
+        self.coins = []
         self.numberOfCoins = 0
-        self.tableSize = tableSize
+        self.maximumCoins = tableSize
 
     def isFull(self):
-        if self.numberOfCoins >= self.tableSize:
+        if self.numberOfCoins >= self.maximumCoins:
             return True
         return False
 

@@ -3,8 +3,9 @@ from Price import Price
 
 class Pricelist:
     def __init__(self, tableSize):
-        self.prices = [0] * tableSize
+        self.prices = []
         self.numberOfPrices = 0
+        self.maximumPrices = tableSize
 
     def setPrice(self, currency, price):
         self.prices.append(Price(currency, price))

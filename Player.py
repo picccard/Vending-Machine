@@ -3,7 +3,7 @@ from Coin import Coin
 
 class Player:
     def __init__(self, guess, currency, value):
-        self.coin = Mynt(currency, value)
+        self.coin = Coin(currency, value)
         self.guess = guess
         self.guess.sort()
 

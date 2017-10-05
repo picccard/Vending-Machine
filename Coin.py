@@ -3,6 +3,6 @@
 '''
 
 class Coin:
-    def __init__(self, currencyName, value):
-        self.currency = currencyName
+    def __init__(self, currency, value):
+        self.currency = currency
         self.value = value
