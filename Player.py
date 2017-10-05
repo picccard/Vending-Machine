@@ -1,16 +1,16 @@
-from Mynt import Mynt
+from Coin import Coin
 
 
-class Spiller:
-    def __init__(self, tipping, currency, value):
+class Player:
+    def __init__(self, guess, currency, value):
         self.coin = Mynt(currency, value)
-        self.tipping = tipping
-        self.tipping.sort()
+        self.guess = guess
+        self.guess.sort()
 
-    def betal(self):
+    def pay(self):
         tempCoin = self.coin
         self.coin = None
         return tempCoin
 
     def __str__(self):
-        return 'Guess: {}\tCoin:\t{} {}'.format(self.tipping, self.coin.value, self.coin.currency)
+        return 'Guess: {}\tCoin:\t{} {}'.format(self.guess, self.coin.value, self.coin.currency)
