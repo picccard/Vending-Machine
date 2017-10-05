@@ -1,24 +1,24 @@
-from Mynt import Mynt
-class Boesse:
-    def __init__(self, tabellSize):
-        self.myntene = []
-        self.antallMynter = 0
-        self.tabellSize = tabellSize
+from Coin import Coin
+class CoinBox:
+    def __init__(self, tableSize):
+        self.coins = [0] * tableSize
+        self.numberOfCoins = 0
+        self.tableSize = tableSize
 
-    def erFull(self):
-        if self.antallMynter >= self.tabellSize:
+    def isFull(self):
+        if self.numberOfCoins >= self.tableSize:
             return True
         return False
 
     def addCoin(self, coin):
-        if not self.erFull():
-            self.myntene.append(coin)
-            self.antallMynter += 1
+        if not self.isFull():
+            self.coins.append(coin)
+            self.numberOfCoins += 1
             return True
         return False
 
-    def finnBoessen(self):
+    def getCoinBox(self):
         answer = 'The box contains: '
-        for mynt in self.myntene:
-            answer += '\n{} {}'.format(mynt.currency, mynt.value)
+        for coin in self.coins:
+            answer += '\n{} {}'.format(coin.currency, coin.value)
         return answer
