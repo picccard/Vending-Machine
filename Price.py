@@ -1,8 +1,8 @@
 import math
-class Pris:
-    def __init__(self, currencyName, price):
-        self.currencyName = currencyName
+class Price:
+    def __init__(self, currency, price):
+        self.currency = currency
         self.price = price
 
-    def finnAntallTippetall(self, value):
+    def getAllowedGuesses(self, value):
         return math.floor(value / self.price)
