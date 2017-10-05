@@ -1,4 +1,4 @@
-from Coin import Coin
+from .Coin import Coin
 
 
 class Player:

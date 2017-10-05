@@ -1,6 +1,7 @@
-from Pricelist import Pricelist
-from CoinBox import CoinBox
-from Raffle import Raffle
+from .Pricelist import Pricelist
+from .CoinBox import CoinBox
+from .Raffle import Raffle
+
 class VendingMachine:
     def __init__(self, pricelistSize, coinBoxSize):
         self.pricelist = Pricelist(pricelistSize)

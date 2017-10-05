@@ -1,4 +1,4 @@
-from Price import Price
+from .Price import Price
 
 
 class Pricelist:

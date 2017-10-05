@@ -1,10 +1,10 @@
-from Coin import Coin
-from Player import Player
-from CoinBox import CoinBox
-from Price import Price
-from Pricelist import Pricelist
-from Raffle import Raffle
-from VendingMachine import VendingMachine
+from lib.Coin import Coin
+from lib.Player import Player
+from lib.CoinBox import CoinBox
+from lib.Price import Price
+from lib.Pricelist import Pricelist
+from lib.Raffle import Raffle
+from lib.VendingMachine import VendingMachine
 import os, sys
 #import Coin, Player, CoinBox, Price, Pricelist, Raffle, VendingMachine, os, sys
 
