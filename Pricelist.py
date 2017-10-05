@@ -1,33 +1,29 @@
-from Pris import Pris
+from Price import Price
 
 
-class Prisliste:
-    def __init__(self, priseneStr):
-        self.prisene = []
-        self.antallPriser = 0
-        self.antallPriserSize = priseneStr
+class Pricelist:
+    def __init__(self, tableSize):
+        self.prices = [0] * tableSize
+        self.numberOfPrices = 0
 
-    def settPris(self, currencyName, price):
-        self.prisene.append(Pris(currencyName, price))
-        self.antallPriser += 1
+    def setPrice(self, currency, price):
+        self.prices.append(Price(currency, price))
+        self.numberOfPrices += 1
 
-    def finnAntallTippetall(self, currencyName, value):
-        for pris in self.prisene:
-            if pris.currencyName == currencyName:
-                return pris.finnAntallTippetall(value)
+    def getAllowedGuesses(self, currency, value):
+        for price in self.prices:
+            if price.currency == currency:
+                return price.getAllowedGuesses(value)
+        return 0
 
-    def finnPrisEttTall(self, currencyName):
-        for pris in self.prisene:
-            if pris.currencyName == currencyName:
-                return pris.price
-        return -1
+    def getPriceForAGuess(self, currency):
+        for price in self.prices:
+            if price.currency == currency:
+                return price.price
+        return None
 
-    def finnPrislisten(self):
+    def getPricelist(self):
         answer = '~ Pricelist:\n'
-        for pris in self.prisene:
-            answer += '{}\t{}\n'.format(pris.currencyName, "{0:.2f}".format(pris.price))
-            # if pris.currencyName == 'DONG':
-            #     # answer += '\t( ͡° ͜ʖ ͡°)\n'
-            # else:
-            #     answer += '\n'
+        for price in self.prices:
+            answer += '{}\t{}\n'.format(price.currency, "{0:.2f}".format(price.price))
         return answer
