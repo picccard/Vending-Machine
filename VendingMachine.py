@@ -1,32 +1,32 @@
-from Prisliste import Prisliste
-from Boesse import Boesse
-from Trekning import Trekning
-class Automat:
-    def __init__(self, prislisteSize, boesseSize):
-        self.prisliste = Prisliste(prislisteSize)
-        self.boesse = Boesse(boesseSize)
+from Pricelist import Pricelist
+from CoinBox import CoinBox
+from Raffle import Raffle
+class VendingMachine:
+    def __init__(self, pricelistSize, coinBoxSize):
+        self.pricelist = Pricelist(pricelistSize)
+        self.coinBox = CoinBox(coinBoxSize)
 
-    def spill(self, player):
-        self.boesse.addCoin(player.betal())
-        return Trekning()
+    def play(self, player):
+        self.coinBox.addCoin(player.pay())
+        return Raffle()
 
-    def settPris(self, currencyName, price):
-        self.prisliste.settPris(currencyName, price)
+    def setPrice(self, currency, price):
+        self.pricelist.settPris(currency, price)
 
-    def erBoessenFull(self):
-        return self.boesse.erFull()
+    def isCoinBoxFull(self):
+        return self.coinBox.ifFull()
 
-    def finnPrisEttTall(self, currencyName):
-        return self.prisliste.finnPrisEttTall(currencyName)
+    def getPriceForAGuess(self, currency):
+        return self.pricelist.getPriceForAGuess(currency)
 
-    def finnAntallTippetall(self, currencyName, value):
-        return self.prisliste.finnAntallTippetall(currencyName, value)
+    def getAllowedGuesses(self, currency, value):
+        return self.pricelist.getAllowedGuesses(currency, value)
 
-    def finnPrislisten(self):
+    def getPricelist(self):
         return self.prisliste.finnPrislisten()
 
-    def finnBoessen(self):
+    def getCoinBox(self):
         return self.boesse.finnBoessen()
 
-    def finnAntallRette(self, trekking, spiller):
-        return trekking.finnAntallRette(spiller.tipping)
+    def getMatches(self, raffle, player):
+        return raffle.getMatches(player.guess)
